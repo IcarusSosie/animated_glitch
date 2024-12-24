@@ -40,7 +40,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec2 uv = fragCoord.xy / uResolution.xy;
     
     // Copy original color
-    vec3 outColor = texture(uChannel0, uv).rgb;
+    vec4 outColor = texture(uChannel0, uv).rgba;
     float randomChance = random2d(vec2(time, 9545.0));
     bool shouldGlitch = randomChance <= uChance / MAX_CHANCE; 
     
@@ -58,7 +58,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
                 vec2 uvOff = uv;
                 uvOff.x += hOffset;
                 if (insideRange(uv.y, sliceY, fract(sliceY + sliceH)) == 1.0){
-                    outColor = texture(uChannel0, uvOff).rgb;
+                    outColor = texture(uChannel0, uvOff).rgba;
                 }
             }
         }
@@ -80,7 +80,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         }
     }
   
-    fragColor = vec4(outColor, 1.0);
+    fragColor = outColor;
  
 }
 
